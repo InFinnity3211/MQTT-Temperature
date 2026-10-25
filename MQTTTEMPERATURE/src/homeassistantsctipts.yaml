@@ -1,0 +1,30 @@
+// The yaml scripts for in home asistant for updating the beta values from home assistant
+// use an input number in homeassitant and switch "beta_10k" for the name you picked
+
+
+alias: 10k Beta
+description: Publish the 10k thermistor beta value to MQTT
+triggers:
+  - trigger: state
+    entity_id: input_number.beta_10k
+actions:
+  - action: mqtt.publish
+    data:
+      topic: esp32/beta10k
+      payload: '{{ states(''input_number.beta_10k'') }}'
+      retain: true
+mode: single
+
+alias: 100k Beta
+description: Publish the 100k thermistor beta value to MQTT
+triggers:
+  - trigger: state
+    entity_id: input_number.beta_100k
+actions:
+  - action: mqtt.publish
+    data:
+      topic: esp32/beta100k
+      payload: '{{ states(''input_number.beta_100k'') }}'
+      retain: true
+mode: single
+
